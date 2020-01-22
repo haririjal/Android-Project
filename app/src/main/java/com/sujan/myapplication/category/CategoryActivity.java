@@ -6,14 +6,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.sujan.myapplication.MainActivity;
 import com.sujan.myapplication.R;
+import com.sujan.myapplication.listener.OnClickListener;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 public class CategoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -26,8 +31,8 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         initToolbar();
+        getData();
         findViews();
-        setData();
         initRecyclerView();
     }
 
@@ -42,56 +47,32 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
     }
 
-    private void setData() {
-        Random rand = new Random();
-        Category cate1 = new Category();
-        Category cate4 = new Category();
-        Category cate2 = new Category();
-        Category cate5 = new Category();
-        Category cate3 = new Category();
-        Category cate6 = new Category();
-        cate1.setTitle("Non-Veg Restaurant");
-        cate1.setId(rand.nextInt(1000));
-        cate4.setTitle("Non-Veg Restaurant");
-        cate2.setId(rand.nextInt(1000));
-        cate3.setId(rand.nextInt(1000));
-        cate4.setId(rand.nextInt(1000));
-        cate5.setId(rand.nextInt(1000));
-        cate6.setId(rand.nextInt(1000));
-
-        cate2.setTitle("Veg Restaurant");
-        cate5.setTitle("Veg Restaurant");
-        cate3.setTitle("Drinks");
-        cate6.setTitle("Drinks");
-        cate1.setDescription("Order your favorite food from Restaurant.");
-        cate4.setDescription("Order your favorite food from Restaurant.");
-        cate2.setDescription("Pure vegetarian Restaurant");
-        cate5.setDescription("Pure vegetarian Restaurant");
-        cate3.setDescription("Drinks home delivery.");
-        cate6.setDescription("Drinks home delivery.");
-        categoryList.add(cate1);
-        categoryList.add(cate2);
-        categoryList.add(cate3);
-        categoryList.add(cate4);
-        categoryList.add(cate5);
-        categoryList.add(cate6);
-        saveDataDb();
-//        adapter.notifyDataSetChanged();
-
-    }
 
     private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CategoryAdapter(categoryList);
+        adapter = new CategoryAdapter(categoryList, new OnClickListener() {
+            @Override
+            public void onClick(int position) {
+                Category obj= categoryList.get(position);
+                Intent intent= new Intent(CategoryActivity.this, MainActivity.class);
+                intent.putExtra("id", obj.getId());
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
-    private void saveDataDb(){
-        Realm realm= Realm.getDefaultInstance();
+    private void getData() {
+        Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        realm.copyToRealmOrUpdate(categoryList);
+        RealmResults<Category> results = realm.where(Category.class).findAll();
         realm.commitTransaction();
+        if (results.size() > 0)
+            categoryList.addAll(results);
+
     }
+
+
 }

@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sujan.myapplication.category.Category;
 import com.sujan.myapplication.category.CategoryActivity;
 import com.sujan.myapplication.home.DashboardActivity;
 import com.sujan.myapplication.util.Prefs;
@@ -43,7 +44,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -60,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String currentImagePath;
     private Bitmap bitmap;
     private String type = "";
+    private ArrayList<Category> categoryList = new ArrayList<>();
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -290,6 +294,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         iniToolbar();
+        setData();
         edtEmailAddress = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnSubmit = findViewById(R.id.btnSubmit);
@@ -398,6 +403,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else{
             Toast.makeText(this, "Invalid email and password", Toast.LENGTH_SHORT).show();
         }
+        realm.commitTransaction();
+    }
+    private void setData() {
+        Random rand = new Random();
+        Category cate1 = new Category();
+        Category cate4 = new Category();
+        Category cate2 = new Category();
+        Category cate5 = new Category();
+        Category cate3 = new Category();
+        Category cate6 = new Category();
+        cate1.setTitle("Non-Veg Restaurant");
+        cate1.setId(rand.nextInt(1000));
+        cate4.setTitle("Non-Veg Restaurant");
+        cate2.setId(rand.nextInt(1000));
+        cate3.setId(rand.nextInt(1000));
+        cate4.setId(rand.nextInt(1000));
+        cate5.setId(rand.nextInt(1000));
+        cate6.setId(rand.nextInt(1000));
+
+        cate2.setTitle("Veg Restaurant");
+        cate5.setTitle("Veg Restaurant");
+        cate3.setTitle("Drinks");
+        cate6.setTitle("Drinks");
+        cate1.setDescription("Order your favorite food from Restaurant.");
+        cate4.setDescription("Order your favorite food from Restaurant.");
+        cate2.setDescription("Pure vegetarian Restaurant");
+        cate5.setDescription("Pure vegetarian Restaurant");
+        cate3.setDescription("Drinks home delivery.");
+        cate6.setDescription("Drinks home delivery.");
+        categoryList.add(cate1);
+        categoryList.add(cate2);
+        categoryList.add(cate3);
+        categoryList.add(cate4);
+        categoryList.add(cate5);
+        categoryList.add(cate6);
+        saveDataDb();
+//        adapter.notifyDataSetChanged();
+
+    }
+
+    private void saveDataDb(){
+        Realm realm= Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(categoryList);
         realm.commitTransaction();
     }
 }

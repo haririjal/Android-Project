@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtEmail;
     private Button btnSubmit;
     private String value;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +23,12 @@ public class MainActivity extends AppCompatActivity {
         edtEmail= findViewById(R.id.edtEmail);
         btnSubmit= findViewById(R.id.btnSubmit);
         value= getIntent().getStringExtra("Name");
+        id= getIntent().getIntExtra("id", 0);
         if (value!=null && !value.equals("")){
             Log.d("IntentValue", value);
+        }
+        if (id!=0) {
+            Log.d("IntentValue", String.valueOf(id));
         }
     }
 }
