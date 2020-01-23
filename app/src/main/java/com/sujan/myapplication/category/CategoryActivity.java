@@ -56,7 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(int position) {
                 Category obj= categoryList.get(position);
-                Intent intent= new Intent(CategoryActivity.this, MainActivity.class);
+                Intent intent= new Intent(CategoryActivity.this, CategoryDetailActivity.class);
                 intent.putExtra("id", obj.getId());
                 startActivity(intent);
             }

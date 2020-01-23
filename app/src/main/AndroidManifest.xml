@@ -20,9 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignupActivity">
-
-        </activity>
+        <activity android:name=".category.CategoryDetailActivity"></activity>
+        <activity android:name=".SignupActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -34,10 +33,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".home.DashboardActivity"></activity>
-        <activity android:name=".category.CategoryActivity">
-
-        </activity>
+        <activity android:name=".home.DashboardActivity" />
+        <activity android:name=".category.CategoryActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

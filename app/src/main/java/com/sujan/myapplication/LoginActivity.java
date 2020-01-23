@@ -446,6 +446,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void saveDataDb(){
         Realm realm= Realm.getDefaultInstance();
         realm.beginTransaction();
+        realm.delete(Category.class);
         realm.copyToRealmOrUpdate(categoryList);
         realm.commitTransaction();
     }
