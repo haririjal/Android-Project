@@ -60,6 +60,8 @@ public class CategoryDetailActivity extends AppCompatActivity {
         category.setDescription(edtDescription.getText().toString().trim());
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
+        category.deleteFromRealm();
+        realm.deleteAll();
         realm.copyToRealmOrUpdate(category);
         realm.commitTransaction();
         Toast.makeText(this, "Category data updated successfully.", Toast.LENGTH_SHORT).show();
