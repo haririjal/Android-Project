@@ -73,9 +73,9 @@ public class DashboardMainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SalesDashboardFragment(), "Sales");
-        adapter.addFragment(new UserDashboardFragment(), "User");
-        adapter.addFragment(new CustomerDashbordFragment(), "Customer");
+        adapter.addFragment(new SalesDashboardFragment(), "");
+        adapter.addFragment(new UserDashboardFragment(), "");
+        adapter.addFragment(new CustomerDashbordFragment(), "");
         viewPager.setAdapter(adapter);
     }
 }
