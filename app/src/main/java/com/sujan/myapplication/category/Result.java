@@ -1,47 +1,52 @@
 package com.sujan.myapplication.category;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+import io.realm.annotations.PrimaryKey;
 
-    @SerializedName("popularity")
-    @Expose
-    private Double popularity;
+public class Result {
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
-    @SerializedName("video")
-    @Expose
-    private Boolean video;
-    @SerializedName("poster_path")
-    @Expose
-    private String posterPath;
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("adult")
+    @SerializedName("video")
     @Expose
-    private Boolean adult;
-    @SerializedName("backdrop_path")
+    private Boolean video;
+    @SerializedName("vote_average")
     @Expose
-    private String backdropPath;
+    private Double voteAverage;
+    @SerializedName("title")
+    @Expose
+    private String title;
+    @SerializedName("popularity")
+    @Expose
+    private Double popularity;
+    @SerializedName("poster_path")
+    @Expose
+    private String posterPath;
     @SerializedName("original_language")
     @Expose
     private String originalLanguage;
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
-    @SerializedName("genre_ids")
+    @SerializedName("backdrop_path")
     @Expose
-    private List<Integer> genreIds = null;
-    @SerializedName("title")
+    private String backdropPath;
+    @SerializedName("adult")
     @Expose
-    private String title;
-    @SerializedName("vote_average")
-    @Expose
-    private Integer voteAverage;
+    private Boolean adult;
     @SerializedName("overview")
     @Expose
     private String overview;
@@ -49,12 +54,21 @@ public class Result {
     @Expose
     private String releaseDate;
 
-    public Double getPopularity() {
-        return popularity;
+    private Date dateTime;
+
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setPopularity(Double popularity) {
-        this.popularity = popularity;
+    public void setDateTime() {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = null;
+        try {
+            date = format.parse(getReleaseDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.dateTime = date;
     }
 
     public Integer getVoteCount() {
@@ -65,22 +79,6 @@ public class Result {
         this.voteCount = voteCount;
     }
 
-    public Boolean getVideo() {
-        return video;
-    }
-
-    public void setVideo(Boolean video) {
-        this.video = video;
-    }
-
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -89,20 +87,44 @@ public class Result {
         this.id = id;
     }
 
-    public Boolean getAdult() {
-        return adult;
+    public Boolean getVideo() {
+        return video;
     }
 
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
+    public void setVideo(Boolean video) {
+        this.video = video;
     }
 
-    public String getBackdropPath() {
-        return backdropPath;
+    public Double getVoteAverage() {
+        return voteAverage;
     }
 
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
+    public void setVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Double getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Double popularity) {
+        this.popularity = popularity;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
     public String getOriginalLanguage() {
@@ -121,28 +143,20 @@ public class Result {
         this.originalTitle = originalTitle;
     }
 
-    public List<Integer> getGenreIds() {
-        return genreIds;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
-    public String getTitle() {
-        return title;
+    public Boolean getAdult() {
+        return adult;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getVoteAverage() {
-        return voteAverage;
-    }
-
-    public void setVoteAverage(Integer voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setAdult(Boolean adult) {
+        this.adult = adult;
     }
 
     public String getOverview() {
@@ -159,6 +173,8 @@ public class Result {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+        setDateTime();
     }
+
 
 }
