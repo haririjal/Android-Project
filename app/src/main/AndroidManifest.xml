@@ -16,6 +16,13 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@mipmap/icon_transparent" />
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_color"
+        android:resource="@color/colorPrimary" />
+
     <application
         android:name=".util.ExampleApplication"
         android:allowBackup="true"

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "264988212885",
+    "firebase_url": "https://bim-test-df92e.firebaseio.com",
+    "project_id": "bim-test-df92e",
+    "storage_bucket": "bim-test-df92e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264988212885:android:a1f8456bc01dd50cc6259c",
+        "android_client_info": {
+          "package_name": "com.sujan.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264988212885-pkgdpjonathnhaq1tpb4fpng22bpnfov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXcP7TBymrryFj0LookxzzShIqKrIUu1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264988212885-pkgdpjonathnhaq1tpb4fpng22bpnfov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
