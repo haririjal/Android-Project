@@ -41,7 +41,6 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
         initToolbar();
-        initRecyclerView();
         callMovieApi();
         showMovieData();
         findViews();
@@ -89,7 +88,7 @@ public class MovieActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Movie movie = response.body();
                     movieResult.addAll(movie.getResults());
-                    adapter.notifyDataSetChanged();
+                    initRecyclerView();
                 }
             }
 
