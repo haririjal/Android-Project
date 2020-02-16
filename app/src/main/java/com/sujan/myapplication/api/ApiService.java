@@ -15,8 +15,7 @@ public interface ApiService {
     );
 
     @GET("movie/{movieId}")
-    Call<MovieDetails> getMovie(
-            @Path("movieId") int movieId,
-            @Query("api_key") String apiKey);
+    Call<MovieDetails> getMovie(@Path("movieId") int movieId,
+                                @Query("api_key") String apiKey);
 
 }
